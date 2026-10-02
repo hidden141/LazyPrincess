@@ -1,6 +1,7 @@
 FROM python:3.10-slim-bookworm
 
-WORKDIR /app
+RUN mkdir /LazyPrincess
+WORKDIR /LazyPrincess
 
 # Install system dependencies
 RUN apt-get update && \
@@ -10,6 +11,7 @@ RUN apt-get update && \
 # Copy requirements first for Docker cache
 COPY requirements.txt .
 
+RUN cd /
 # Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
@@ -18,4 +20,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Start the bot
-CMD ["python", "bot.py"]
+
+CMD ["/bin/bash", "/start.sh"]
+
+
+
+
